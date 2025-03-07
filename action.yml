@@ -39,6 +39,10 @@ inputs:
     description: "Obfuscate the build"
     required: false
     default: "false"
+  build-devtools:
+    description: "Build with devtools enabled"
+    required: false
+    default: "false"
   wails-version:
     description: "Wails version to use"
     required: false
@@ -141,6 +145,9 @@ runs:
         build_options=""
         if ${{ inputs.build-obfuscate == 'true' }}; then
           build_options+=' -obfuscated'
+        fi
+        if ${{ inputs.build-devtools == 'true' }}; then
+          build_options+=' -devtools'
         fi
         if [[ "${{ inputs.build-tags }}" != "false" ]]; then
           tags_string="${{ inputs.build-tags }}"
