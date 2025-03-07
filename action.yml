@@ -203,7 +203,7 @@ runs:
       run: |
         $nsisConfig = "build/windows/info.json"
         (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $nsisConfig
-      shell: bash
+      shell: powershell
     - name: Update MacOS filenames
       if: matrix.platform == 'darwin/universal'
       run: |
@@ -211,7 +211,7 @@ runs:
         $darwinConfigDev = "build/darwin/Info.plist"
         (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $darwinConfig
         (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $darwinConfigDev
-      shell: bash
+      shell: pwsh
     # Building step
     - name: Build App
       env:
