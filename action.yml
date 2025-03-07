@@ -298,7 +298,7 @@ runs:
       shell: pwsh
       if: runner.os == 'Windows'
       run: | 
-        Rename-Item -Path ".\build\bin\${{inputs.build-name}}" -NewName ".\build\bin\${{inputs.build-name}}.exe"
+        Rename-Item -Path ".\build\bin\${{inputs.build-name}}" -NewName "${{inputs.build-name}}.exe"
     # Upload build assets
     - uses: actions/upload-artifact@v4
       if: inputs.package == 'true'
