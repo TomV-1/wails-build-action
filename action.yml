@@ -202,15 +202,15 @@ runs:
       if: matrix.platform == 'windows/amd64'
       run: |
         $nsisConfig = "build/windows/info.json"
-        (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', '${{inputs.build-name}}' | Set-Content $nsisConfig
+        (Get-Content $nsisConfig) -replace '{{.Info.ProductName}}', '${{inputs.build-name}}' | Set-Content $nsisConfig
       shell: powershell
     - name: Update MacOS filenames
       if: matrix.platform == 'darwin/universal'
       run: |
         $darwinConfig = "build/darwin/Info.plist"
         $darwinConfigDev = "build/darwin/Info.plist"
-        (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', '${{inputs.build-name}}' | Set-Content $darwinConfig
-        (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', '${{inputs.build-name}}' | Set-Content $darwinConfigDev
+        (Get-Content $darwinConfig) -replace '{{.Info.ProductName}}', '${{inputs.build-name}}' | Set-Content $darwinConfig
+        (Get-Content $darwinConfigDev) -replace '{{.Info.ProductName}}', '${{inputs.build-name}}' | Set-Content $darwinConfigDev
       shell: pwsh
     # Building step
     - name: Build App
