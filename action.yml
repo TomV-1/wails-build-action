@@ -200,16 +200,18 @@ runs:
     # Edit target filenames to reflect build-name
     - name: Update Windows filenames
       if: matrix.platform == 'windows/amd64'
-          run: |
-            $nsisConfig = "build/windows/info.json"
-            (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $nsisConfig
+      run: |
+        $nsisConfig = "build/windows/info.json"
+        (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $nsisConfig
+      shell: bash
     - name: Update MacOS filenames
       if: matrix.platform == 'darwin/universal'
-          run: |
-            $darwinConfig = "build/darwin/Info.plist"
-            $darwinConfigDev = "build/darwin/Info.plist"
-            (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $darwinConfig
-            (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $darwinConfigDev
+      run: |
+        $darwinConfig = "build/darwin/Info.plist"
+        $darwinConfigDev = "build/darwin/Info.plist"
+        (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $darwinConfig
+        (Get-Content $nsisScript) -replace '{{.Info.ProductName}}', ${{inputs.build-name}} | Set-Content $darwinConfigDev
+      shell: bash
     # Building step
     - name: Build App
       env:
